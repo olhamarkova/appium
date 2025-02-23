@@ -8,6 +8,12 @@ class App:
     def get_by_id(self, locator):
         return self.__driver.find_element(AppiumBy.ID, locator)
 
+    def get_by_xpath(self, locator):
+        return self.__driver.find_element(AppiumBy.XPATH, locator)
+
+    def get_elements_by_xpath(self, locator):
+        return self.__driver.find_elements(AppiumBy.XPATH, locator)
+
     def wait(self, sec):
         self.__driver.implicitly_wait(sec)
 

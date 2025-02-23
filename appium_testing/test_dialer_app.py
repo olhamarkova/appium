@@ -14,7 +14,7 @@ dialer.open_dialer()
 
 dialer.click_digit_button("one")
 dialer.click_digit_button("seven")
-dialer.click_digit_button('three')
+dialer.click_digit_button("three")
 dialer.click_digit_button("five")
 
 dialer.make_call()
