@@ -1,21 +1,20 @@
-from appium import webdriver
-from appium.webdriver.common.appiumby import AppiumBy
+from appium_testing.core.core_app import App
 
-class DialerApp:
+class DialerApp(App):
     def __init__(self, options):
-        self.__driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
+        super().__init__(options)
 
     def __dialer_tab(self):
-        return self.__driver.find_element(AppiumBy.ID, "com.google.android.dialer:id/dialpad_fab")
+        return self.get_by_id("com.google.android.dialer:id/dialpad_fab")
 
     def __digit_button(self, digit):
-        return self.__driver.find_element(AppiumBy.ID, f"com.google.android.dialer:id/{digit}")
+        return self.get_by_id(f"com.google.android.dialer:id/{digit}")
 
     def __call_button(self):
-        return self.__driver.find_element(AppiumBy.ID, "com.google.android.dialer:id/dialpad_voice_call_button")
+        return self.get_by_id("com.google.android.dialer:id/dialpad_voice_call_button")
 
     def __end_call_button(self):
-        return self.__driver.find_element(AppiumBy.ID, "com.google.android.dialer:id/incall_end_call")
+        return self.get_by_id("com.google.android.dialer:id/incall_end_call")
 
     def click_digit_button(self, digit):
         self.__digit_button(digit).click()
@@ -29,8 +28,4 @@ class DialerApp:
     def end_call(self):
         self.__end_call_button().click()
 
-    def wait(self, sec):
-        self.__driver.implicitly_wait(sec)
 
-    def quit(self):
-        self.__driver.quit()

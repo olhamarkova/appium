@@ -1,5 +1,4 @@
 from appium.webdriver.appium_service import AppiumService
-from appium.options.android import UiAutomator2Options
 
 appium_service = AppiumService()
 
