@@ -1,9 +1,9 @@
 from core.server_launching import start_appium_server, stop_appium_server
-from core.desired_caps import get_app_capabilities, load_capabilities
+from core.desired_caps import load_capabilities, app_capabilities
 from dialer.dialer_app import DialerApp
 
 # setup
-desired_caps = get_app_capabilities("com.google.android.dialer", ".extensions.GoogleDialtactsActivity")
+desired_caps = app_capabilities(appPackage="com.google.android.dialer", appActivity=".extensions.GoogleDialtactsActivity")
 start_appium_server()
 capabilities_options = load_capabilities(desired_caps)
 
