@@ -25,6 +25,9 @@ class App:
     def get_elements_by_xpath(self, locator):
         return self.__driver.find_elements(AppiumBy.XPATH, locator)
 
+    def get_scrollable_element_by_text(self, text):
+        return self.__driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+text+"\").instance(0))")
+
     def press_enter(self):
         self.__driver.press_keycode(66)
 
@@ -40,6 +43,16 @@ class App:
                 wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, locator)))
             case "XPATH":
                 wait.until(EC.element_to_be_clickable((AppiumBy.XPATH, locator)))
+
+    def wait_for_element_to_be_visible(self, method, locator, sec):
+        wait = WebDriverWait(self.__driver, sec)
+        match method:
+            case "ID":
+                wait.until(EC.visibility_of_element_located((AppiumBy.ID, locator)))
+            case "UI_AUTOMATOR":
+                wait.until(EC.visibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, locator)))
+            case "XPATH":
+                wait.until(EC.visibility_of_element_located((AppiumBy.XPATH, locator)))
 
     def quit(self):
         self.__driver.quit()
