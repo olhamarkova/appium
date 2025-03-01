@@ -22,6 +22,9 @@ class ContactsApp(App):
     def __contact_name(self):
         return self.get_by_id("com.google.android.contacts:id/large_title")
 
+    def __contact(self, name):
+        return self.get_by_xpath(f'//android.widget.TextView[@resource-id="com.google.android.dialer:id/contact_name" and @text="{name}"]')
+
     def get_numbers_count(self):
         length = len(self.get_elements_by_xpath('//android.widget.LinearLayout[@resource-id="com.google.android.dialer:id/click_target"]'))
         print(length)
@@ -35,8 +38,11 @@ class ContactsApp(App):
     def open_contacts_tab(self):
         self.__contacts_tab().click()
 
-    def open_contact(self, name):
+    def scroll_and_open_contact(self, name):
         self.get_scrollable_element_by_text(name).click()
+
+    def open_contact(self, name):
+        self.__contact(name).click()
 
     def open_new_contact_form(self):
         self.__create_contact_btn().click()

@@ -56,3 +56,8 @@ class App:
 
     def quit(self):
         self.__driver.quit()
+
+    def swipe_up(self, count):
+        for i in range(1, count):
+            print(f"I swipe {i} time(s)")
+            self.__driver.swipe(514,600,514,200,1000)

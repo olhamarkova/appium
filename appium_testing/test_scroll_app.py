@@ -11,9 +11,10 @@ contact = ContactsApp(capabilities_options)
 
 #test
 contact.open_contacts_tab()
-
+contact.swipe_up(3)
 contact.open_contact("test1 appium")
-contact.wait(5)
+#contact.scroll_and_open_contact("test1 appium")
+contact.wait_contact_opened()
 contact_name = contact.get_number_title_text()
 assert contact_name == "test1 appium"
 
