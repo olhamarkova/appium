@@ -14,6 +14,14 @@ class App:
     def get_by_xpath(self, locator):
         return self.__driver.find_element(AppiumBy.XPATH, locator)
 
+    def get_by_uiautomator(self, locator):
+        """
+        Method to find an element by new UiSelector()
+        :param locator: must be a string in the format 'method("locator")' without new UiSelector()
+        :return: element
+        """
+        return self.__driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, locator)
+
     def get_elements_by_xpath(self, locator):
         return self.__driver.find_elements(AppiumBy.XPATH, locator)
 
@@ -23,9 +31,15 @@ class App:
     def wait(self, sec):
         self.__driver.implicitly_wait(sec)
 
-    def wait_for_element_to_be_clickable(self, locator, sec):
+    def wait_for_element_to_be_clickable(self, method, locator, sec):
         wait = WebDriverWait(self.__driver, sec)
-        wait.until(EC.element_to_be_clickable((By.ID, locator)))
+        match method:
+            case "ID":
+                wait.until(EC.element_to_be_clickable((AppiumBy.ID, locator)))
+            case "UI_AUTOMATOR":
+                wait.until(EC.element_to_be_clickable((AppiumBy.ANDROID_UIAUTOMATOR, locator)))
+            case "XPATH":
+                wait.until(EC.element_to_be_clickable((AppiumBy.XPATH, locator)))
 
     def quit(self):
         self.__driver.quit()

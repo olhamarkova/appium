@@ -10,6 +10,8 @@ capabilities_options = load_capabilities(desired_caps)
 dialer = DialerApp(capabilities_options)
 
 # test
+dialer.wait_for_recents()
+dialer.open_recents()
 dialer.open_dialer()
 
 dialer.click_digit_button("one")
@@ -19,7 +21,7 @@ dialer.click_digit_button("five")
 
 dialer.make_call()
 
-dialer.wait(1)
+dialer.wait(2)
 
 dialer.end_call()
 
