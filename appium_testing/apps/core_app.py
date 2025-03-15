@@ -30,6 +30,12 @@ class App:
     def get_scrollable_element_by_text(self, text):
         return self.__driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+text+"\").instance(0))")
 
+    def open_url(self, url):
+        self.__driver.get(url)
+
+    def _get_title(self):
+        return self.__driver.title
+
     def press_enter(self):
         self.__driver.press_keycode(66)
 

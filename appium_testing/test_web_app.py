@@ -1,37 +1,21 @@
 import time
 
-from appium import webdriver
-from appium.options.android import UiAutomator2Options
-from appium.webdriver.appium_service import AppiumService
-from appium.webdriver.common.appiumby import AppiumBy
-from utils.desired_caps import get_web_capabilities
+from appium_testing.apps.web_app.web_app import WebApp
+from utils.server_launching import stop_appium_server
+from utils.desired_caps import load_capabilities, app_capabilities
 
-desired_caps = get_web_capabilities()
+desired_caps = app_capabilities(browserName="Chrome", automationName="UiAutomator2")
+capabilities_options = load_capabilities(desired_caps)
 
-# start server
-appium_service = AppiumService()
-appium_service.start()
-print(appium_service.is_running)
-print(appium_service.is_listening)
+wiki = WebApp(capabilities_options)
 
-capabilities_options = UiAutomator2Options().load_capabilities(desired_caps)
-driver = webdriver.Remote("http://127.0.0.1:4723", options = capabilities_options)
+wiki.open_url("https://commons.m.wikimedia.org/wiki/Main_Page")
 
-# automate web app (Google Chrome)
-driver.get("https://commons.m.wikimedia.org/wiki/Main_Page")
-
-driver.find_element(AppiumBy.XPATH, "//label[@for='main-menu-input']").click()
-
-driver.find_element(AppiumBy.XPATH, "//li/a[contains(., 'Random')]").click()
-print(driver.title)
-title = driver.title
-for word in title.split():
-    assert "File:" in word
-    print('Here it is!')
-    break
+wiki.open_menu()
+wiki.go_to_random()
+wiki.assert_title()
 
 time.sleep(2)
 
-# stop the server
-driver.quit()
-appium_service.stop()
+wiki.quit()
+stop_appium_server()
