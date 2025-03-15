@@ -1,6 +1,6 @@
-from appium_testing.cossacks_game.cossacks_game import CossacksGame
-from core.server_launching import start_appium_server, stop_appium_server
-from core.desired_caps import load_capabilities, app_capabilities
+from appium_testing.apps.cossacks_game.cossacks_game import CossacksGame
+from utils.server_launching import start_appium_server, stop_appium_server
+from utils.desired_caps import load_capabilities, app_capabilities
 
 # setup
 desired_caps = app_capabilities(app="appium_testing/app/cossacks.apk")

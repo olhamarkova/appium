@@ -4,7 +4,7 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.appium_service import AppiumService
 from appium.webdriver.common.appiumby import AppiumBy
-from core.desired_caps import get_web_capabilities
+from utils.desired_caps import get_web_capabilities
 
 desired_caps = get_web_capabilities()
 

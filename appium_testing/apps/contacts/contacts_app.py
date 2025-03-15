@@ -1,4 +1,4 @@
-from appium_testing.core.core_app import App
+from appium_testing.apps.core_app import App
 
 class ContactsApp(App):
     def __init__(self, options):

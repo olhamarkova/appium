@@ -1,6 +1,6 @@
-from appium_testing.contacts.contacts_app import ContactsApp
-from core.server_launching import start_appium_server, stop_appium_server
-from core.desired_caps import app_capabilities, load_capabilities
+from appium_testing.apps.contacts.contacts_app import ContactsApp
+from utils.server_launching import start_appium_server, stop_appium_server
+from utils.desired_caps import app_capabilities, load_capabilities
 
 # setup
 desired_caps = app_capabilities(appPackage="com.google.android.dialer", appActivity=".extensions.GoogleDialtactsActivity")
