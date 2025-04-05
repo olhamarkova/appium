@@ -9,16 +9,27 @@ def setup():
 
     yield
     stop_appium_server()
-    print("server stopped")
 
-@pytest.fixture(scope="module")
-def get_app():
+@pytest.fixture(scope="function")
+def contact_app():
     desired_caps = app_capabilities(appPackage="com.google.android.dialer",
                                     appActivity=".extensions.GoogleDialtactsActivity")
     capabilities_options = load_capabilities(desired_caps)
     contact = ContactsApp(capabilities_options)
-    return contact
+    yield contact
+    contact.quit()
 
-@pytest.mark.usefixtures("setup", "get_app")
-def test_add_new_contact():
-    print('Pytest test')
+@pytest.mark.usefixtures("setup")
+@pytest.mark.functional
+def test_add_new_contact(contact_app):
+    contact_app.open_contacts_tab()
+    number_of_contacts_before = contact_app.get_numbers_count()
+    contact_app.open_new_contact_form()
+    contact_app.wait(1)
+    contact_app.enter_name("First name", "John")
+    contact_app.enter_name("Last name", "Doe")
+    contact_app.enter_number("234567891")
+    contact_app.save_number()
+    number_of_contacts_after = contact_app.get_numbers_count()
+
+    assert number_of_contacts_before + 1 == number_of_contacts_after
