@@ -8,15 +8,15 @@ contact_app_capabilities = {
 
 def get_data():
     return [
-        ("Jane", "Doe"),
-        ("John", "Foo"),
-        ("Karen", "Smith")
+        ("Jane", "Doe", "234567891"),
+        ("John", "Foo", "334456778"),
+        ("Karen", "Smith", "235458990")
     ]
 
 @pytest.mark.usefixtures("setup")
 @pytest.mark.functional
-@pytest.mark.parametrize("first_name, last_name", get_data())
-def test_add_new_contact(app_factory, first_name, last_name):
+@pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
+def test_add_new_contact(app_factory, first_name, last_name, phone_number):
     with app_factory(ContactsApp, contact_app_capabilities) as contact_app:
         contact_app.open_contacts_tab()
         number_of_contacts_before = contact_app.get_numbers_count()
@@ -24,7 +24,7 @@ def test_add_new_contact(app_factory, first_name, last_name):
         contact_app.wait(1)
         contact_app.enter_name("First name", first_name)
         contact_app.enter_name("Last name", last_name)
-        contact_app.enter_number("234567891")
+        contact_app.enter_number(phone_number)
         contact_app.save_number()
         number_of_contacts_after = contact_app.get_numbers_count()
 
