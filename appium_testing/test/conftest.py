@@ -1,4 +1,5 @@
 import pytest
+import re
 from contextlib import contextmanager
 from appium_testing.utils.server_launching import start_appium_server, stop_appium_server
 from appium_testing.utils.desired_caps import app_capabilities, load_capabilities
@@ -24,3 +25,9 @@ def app_factory():
             app_instance.quit()
 
     return _create_app
+
+@pytest.fixture(scope="function")
+def normalize_phone():
+    def _normalize(number: str) -> str:
+        return re.sub(r"\D", "", number)
+    return _normalize
