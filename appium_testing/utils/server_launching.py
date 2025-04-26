@@ -1,10 +1,11 @@
 from appium.webdriver.appium_service import AppiumService
 
-appium_service = AppiumService()
+class AppiumManager:
+    def __init__(self):
+        self.appium_service = AppiumService()
 
-def start_appium_server():
-    appium_service.start()
-    print(f"Server is running: {appium_service.is_running}")
+    def start_appium_server(self):
+        self.appium_service.start()
 
-def stop_appium_server():
-    appium_service.stop()
+    def stop_appium_server(self):
+        self.appium_service.stop()
