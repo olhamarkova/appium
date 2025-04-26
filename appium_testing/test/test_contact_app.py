@@ -16,7 +16,7 @@ def get_data():
         ("Karen", "Smith", "235458990")
     ]
 
-@pytest.mark.usefixtures("setup")
+
 @pytest.mark.functional
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_add_new_contact(app_factory, first_name, last_name, phone_number):
@@ -47,8 +47,8 @@ def test_open_contact(app_factory, normalize_phone, first_name, last_name, phone
         contact_name = contact_app.get_number_title_text()
         number = contact_app.get_contact_number()
 
-        assert normalize_phone(number) == normalize_phone(phone_number)
         assert contact_name == f"{first_name} {last_name}"
+        assert normalize_phone(number) == normalize_phone(phone_number)
 
 
 @pytest.mark.smoke
