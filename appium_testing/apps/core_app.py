@@ -62,6 +62,16 @@ class App:
             case "XPATH":
                 wait.until(EC.visibility_of_element_located((AppiumBy.XPATH, locator)))
 
+    def wait_element_not_visible(self, method: str, locator: str, sec: int):
+        wait = WebDriverWait(self.__driver, sec)
+        match method:
+            case "ID":
+                wait.until(EC.invisibility_of_element_located((AppiumBy.ID, locator)))
+            case "UI_AUTOMATOR":
+                wait.until(EC.invisibility_of_element_located((AppiumBy.ANDROID_UIAUTOMATOR, locator)))
+            case "XPATH":
+                wait.until(EC.invisibility_of_element_located((AppiumBy.XPATH,locator)))
+
     def quit(self):
         self.__driver.quit()
 

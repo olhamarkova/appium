@@ -25,6 +25,15 @@ class ContactsApp(App):
     def __contact(self, name):
         return self.get_by_xpath(f'//android.widget.TextView[@resource-id="com.google.android.dialer:id/contact_name" and @text="{name}"]')
 
+    def __delete_button(self):
+        return self.get_by_xpath('//androidx.compose.ui.platform.ComposeView[@resource-id="com.google.android.contacts:id/settings_view"]/android.view.View/android.view.View/android.view.View[8]')
+
+    def __confirm_delete_button(self):
+        return self.get_by_xpath('//android.widget.Button[@resource-id="android:id/button1"]')
+
+    def __contact_phone_number(self):
+        return self.get_by_xpath('//android.widget.TextView[@resource-id="com.google.android.contacts:id/header"]')
+
     def get_numbers_count(self):
         length = len(self.get_elements_by_xpath('//android.widget.LinearLayout[@resource-id="com.google.android.dialer:id/click_target"]'))
         print(length)
@@ -32,6 +41,11 @@ class ContactsApp(App):
 
     def get_number_title_text(self):
         text = self.get_by_id("com.google.android.contacts:id/large_title").get_attribute("text")
+        print(text)
+        return text
+
+    def get_contact_number(self):
+        text = self.__contact_phone_number().get_attribute("text")
         print(text)
         return text
 
@@ -56,5 +70,13 @@ class ContactsApp(App):
     def save_number(self):
         self.__save_btn().click()
 
+    def delete_number(self):
+        self.get_scrollable_element_by_text("Delete").click()
+        self.__confirm_delete_button().click()
+
     def wait_contact_opened(self):
         self.wait_for_element_to_be_visible("ID", "com.google.android.contacts:id/large_title", 10)
+
+    def wait_contact_deleted(self, name, sec):
+        contact = f'//android.widget.TextView[@resource-id="com.google.android.dialer:id/contact_name" and @text="{name}"]'
+        self.wait_element_not_visible("XPATH", contact, sec)
