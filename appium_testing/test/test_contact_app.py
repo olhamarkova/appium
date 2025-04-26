@@ -12,8 +12,8 @@ contact_app_capabilities = {
 def get_data():
     return [
         ("Jane", "Doe", "234567891"),
-        ("John", "Foo", "334456778"),
-        ("Karen", "Smith", "235458990")
+        # ("John", "Foo", "334456778"),
+        # ("Karen", "Smith", "235458990")
     ]
 
 

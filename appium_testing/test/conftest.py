@@ -1,10 +1,11 @@
+from typing import Type
 import pytest
 import re
 import time
 import logging
 from contextlib import contextmanager
 from appium_testing.utils.server_launching import AppiumManager
-from appium_testing.utils.desired_caps import app_capabilities, load_capabilities
+from appium_testing.utils.create_capabilities import create_capabilities
 
 logger = logging.getLogger(__name__)
 appium = AppiumManager()
@@ -40,10 +41,10 @@ def appium_server():
 @pytest.fixture(scope="function")
 def app_factory():
     @contextmanager
-    def _create_app(app_class, caps: dict):
-        desired_caps = app_capabilities(**caps)
-        capabilities_options = load_capabilities(desired_caps)
-        app_instance = app_class(capabilities_options)
+    def _create_app(app_class: Type, overrides: dict = None):
+        options = create_capabilities(overrides)
+        app_instance = app_class(options)
+
         try:
             yield app_instance
         finally:
