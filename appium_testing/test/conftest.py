@@ -7,9 +7,10 @@ from appium_testing.utils.desired_caps import app_capabilities, load_capabilitie
 @pytest.fixture(scope="module")
 def setup():
     start_appium_server()
-
-    yield
-    stop_appium_server()
+    try:
+        yield
+    finally:
+        stop_appium_server()
 
 
 @pytest.fixture(scope="function")

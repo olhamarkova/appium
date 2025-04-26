@@ -32,16 +32,26 @@ def test_add_new_contact(app_factory, first_name, last_name, phone_number):
 
 @pytest.mark.smoke
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
-def test_delete_number(app_factory, normalize_phone, first_name, last_name, phone_number):
+def test_open_contact(app_factory, normalize_phone, first_name, last_name, phone_number):
+    with app_factory(ContactsApp, contact_app_capabilities) as contact_app:
+        contact_app.open_contacts_tab()
+        contact_app.scroll_and_open_contact(f"{first_name} {last_name}")
+        contact_app.wait_contact_opened()
+        contact_name = contact_app.get_number_title_text()
+        number = contact_app.get_contact_number()
+
+        assert normalize_phone(number) == normalize_phone(phone_number)
+        assert contact_name == f"{first_name} {last_name}"
+
+
+@pytest.mark.smoke
+@pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
+def test_delete_contact(app_factory, normalize_phone, first_name, last_name, phone_number):
     with app_factory(ContactsApp, contact_app_capabilities) as contact_app:
         contact_app.open_contacts_tab()
         number_of_contacts_before = contact_app.get_numbers_count()
         contact_app.open_contact(f"{first_name} {last_name}")
         contact_app.wait_contact_opened()
-        number = contact_app.get_contact_number()
-
-        assert normalize_phone(number) == normalize_phone(phone_number)
-
         contact_app.delete_number()
         contact_app.wait_contact_deleted(f"{first_name} {last_name}", 5)
         number_of_contacts_after = contact_app.get_numbers_count()
