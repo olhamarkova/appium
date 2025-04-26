@@ -1,5 +1,5 @@
 from utils.server_launching import start_appium_server, stop_appium_server
-from utils.create_capabilities import create_capabilities
+from utils.capabilities_builder import create_capabilities
 from appium_testing.apps.dialer.dialer_app import DialerApp
 
 # setup

@@ -5,7 +5,7 @@ import time
 import logging
 from contextlib import contextmanager
 from appium_testing.utils.server_launching import AppiumManager
-from appium_testing.utils.create_capabilities import create_capabilities
+from appium_testing.utils.capabilities_builder import create_capabilities
 
 logger = logging.getLogger(__name__)
 appium = AppiumManager()

@@ -2,7 +2,7 @@ import time
 
 from appium_testing.apps.web_app.web_app import WebApp
 from utils.server_launching import stop_appium_server
-from utils.create_capabilities import load_capabilities, app_capabilities
+from utils.capabilities_builder import load_capabilities, app_capabilities
 
 desired_caps = app_capabilities(browserName="Chrome", automationName="UiAutomator2")
 capabilities_options = load_capabilities(desired_caps)

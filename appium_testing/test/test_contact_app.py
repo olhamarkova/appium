@@ -1,13 +1,9 @@
 import pytest
 import logging
 from appium_testing.apps.contacts.contacts_app import ContactsApp
+from appium_testing.utils.capabilities_profiles import contact_app_caps
 
 logger = logging.getLogger(__name__)
-
-contact_app_capabilities = {
-    "appPackage": "com.google.android.dialer",
-    "appActivity": ".extensions.GoogleDialtactsActivity",
-}
 
 def get_data():
     return [
@@ -20,7 +16,7 @@ def get_data():
 @pytest.mark.functional
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_add_new_contact(app_factory, first_name, last_name, phone_number):
-    with app_factory(ContactsApp, contact_app_capabilities) as contact_app:
+    with app_factory(ContactsApp, contact_app_caps) as contact_app:
         contact_app.open_contacts_tab()
         logger.info(f"Contact app is opened")
         number_of_contacts_before = contact_app.get_numbers_count()
@@ -38,7 +34,7 @@ def test_add_new_contact(app_factory, first_name, last_name, phone_number):
 @pytest.mark.smoke
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_open_contact(app_factory, normalize_phone, first_name, last_name, phone_number):
-    with app_factory(ContactsApp, contact_app_capabilities) as contact_app:
+    with app_factory(ContactsApp, contact_app_caps) as contact_app:
         contact_app.open_contacts_tab()
         logger.info(f"Contact app is opened")
         contact_app.scroll_and_open_contact(f"{first_name} {last_name}")
@@ -54,7 +50,7 @@ def test_open_contact(app_factory, normalize_phone, first_name, last_name, phone
 @pytest.mark.smoke
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_delete_contact(app_factory, normalize_phone, first_name, last_name, phone_number):
-    with app_factory(ContactsApp, contact_app_capabilities) as contact_app:
+    with app_factory(ContactsApp, contact_app_caps) as contact_app:
         contact_app.open_contacts_tab()
         logger.info(f"Contact app is opened")
         number_of_contacts_before = contact_app.get_numbers_count()
