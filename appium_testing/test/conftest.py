@@ -51,9 +51,3 @@ def app_factory():
             app_instance.quit()
 
     return _create_app
-
-@pytest.fixture(scope="function")
-def normalize_phone():
-    def _normalize(number: str) -> str:
-        return re.sub(r"\D", "", number)
-    return _normalize

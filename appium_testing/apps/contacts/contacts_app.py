@@ -1,4 +1,8 @@
 from appium_testing.apps.core_app import App
+import logging
+from appium_testing.utils.normalize_phone import normalize
+
+logger = logging.getLogger(__name__)
 
 class ContactsApp(App):
     def __init__(self, options):
@@ -51,12 +55,14 @@ class ContactsApp(App):
 
     def open_contacts_tab(self):
         self.__contacts_tab().click()
+        logger.info(f"Contact app is opened")
 
     def scroll_and_open_contact(self, name):
         self.get_scrollable_element_by_text(name).click()
 
     def open_contact(self, name):
         self.__contact(name).click()
+        logger.info(f"Contact {name} is opened")
 
     def open_new_contact_form(self):
         self.__create_contact_btn().click()
@@ -69,10 +75,12 @@ class ContactsApp(App):
 
     def save_number(self):
         self.__save_btn().click()
+        logger.info(f"New contact is saved")
 
     def delete_number(self):
         self.get_scrollable_element_by_text("Delete").click()
         self.__confirm_delete_button().click()
+        logger.info(f"Contact is deleted")
 
     def wait_contact_opened(self):
         self.wait_for_element_to_be_visible("ID", "com.google.android.contacts:id/large_title", 10)
@@ -80,3 +88,19 @@ class ContactsApp(App):
     def wait_contact_deleted(self, name, sec):
         contact = f'//android.widget.TextView[@resource-id="com.google.android.dialer:id/contact_name" and @text="{name}"]'
         self.wait_element_not_visible("XPATH", contact, sec)
+
+    @staticmethod
+    def assert_number_is_correct(expected_number: str, saved_number: str):
+        assert normalize(expected_number) == normalize(saved_number), "Number is incorrect"
+
+    @staticmethod
+    def assert_contact_name_is_correct(contact_name: str, saved_name: str):
+        assert contact_name == saved_name, "Contact name is incorrect"
+
+    @staticmethod
+    def assert_contact_is_deleted(number_of_contacts_before: int, number_of_contacts_after: int):
+        assert number_of_contacts_before - 1 == number_of_contacts_after
+
+    @staticmethod
+    def assert_contact_is_added(number_of_contacts_before: int, number_of_contacts_after: int):
+        assert number_of_contacts_before + 1 == number_of_contacts_after
