@@ -1,6 +1,5 @@
 from typing import Type
 import pytest
-import re
 import time
 import logging
 from contextlib import contextmanager
@@ -16,7 +15,7 @@ def pytest_configure(config):
         format='%(levelname)s: "%(message)s"',
     )
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope = "session", autouse = True)
 def appium_server():
     if appium.appium_service.is_running:
         logger.info("Appium server already running, reusing it.")
@@ -41,7 +40,7 @@ def appium_server():
 @pytest.fixture(scope="function")
 def app_factory():
     @contextmanager
-    def _create_app(app_class: Type, overrides: dict = None):
+    def _create_app(app_class: Type, overrides: dict | None= None):
         options = create_capabilities(overrides)
         app_instance = app_class(options)
 
