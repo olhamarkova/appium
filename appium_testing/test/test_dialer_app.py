@@ -1,11 +1,11 @@
 import pytest
 from appium_testing.apps.dialer.dialer_app import DialerApp
-from appium_testing.utils.capabilities_profiles import contact_app_caps
+from appium_testing.utils.capabilities_profiles import dialer
 
 
 @pytest.mark.functional
 def test_make_call(app_factory):
-    with app_factory(DialerApp, contact_app_caps) as dialer_app:
+    with app_factory(DialerApp, dialer) as dialer_app:
         dialer_app.wait_for_recents()
         dialer_app.open_recents()
         dialer_app.open_dialer()

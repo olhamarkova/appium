@@ -1,7 +1,9 @@
 from configparser import ConfigParser
+import os
 
-config = ConfigParser()
 
 def get_config_property(config_group, prop):
-    config.read("config.ini")
+    config = ConfigParser()
+    path = os.path.join(os.path.dirname(__file__), "..", "config.ini")
+    config.read(path)
     return config.get(config_group, prop)

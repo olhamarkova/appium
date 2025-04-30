@@ -1,11 +1,14 @@
 import time
 
-from appium_testing.apps.web_app.web_app import WebApp
-from utils.server_launching import stop_appium_server
-from utils.capabilities_builder import load_capabilities, app_capabilities
+from apps.web_app.web_app import WebApp
+from utils.capabilities_profiles import chrome
+from utils.server_launching import AppiumManager
+from utils.capabilities_builder import create_capabilities
 
-desired_caps = app_capabilities(browserName="Chrome", automationName="UiAutomator2")
-capabilities_options = load_capabilities(desired_caps)
+
+capabilities_options = create_capabilities(chrome)
+
+AppiumManager().start_appium_server()
 
 wiki = WebApp(capabilities_options)
 
@@ -18,4 +21,4 @@ wiki.assert_title()
 time.sleep(2)
 
 wiki.quit()
-stop_appium_server()
+AppiumManager().start_appium_server()
