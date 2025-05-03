@@ -10,11 +10,17 @@ wiki_url = get_config_property("basic", "wiki_url")
 
 @pytest.mark.functional
 def test_open_random_fact(app_factory):
-    with app_factory(WebApp, chrome) as web_app:
-        web_app.open_url(f"{wiki_url}")
-        web_app.open_menu()
-        web_app.go_to_random()
+    try:
+        with app_factory(WebApp, chrome) as web_app:
+            web_app.open_url(f"{wiki_url}")
+            web_app.open_menu()
+            web_app.go_to_random()
 
-        web_app.assert_title()
+            web_app.assert_title()
 
-        time.sleep(2)
+            time.sleep(2)
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise

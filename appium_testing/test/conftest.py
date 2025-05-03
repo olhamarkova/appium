@@ -9,19 +9,29 @@ from appium_testing.utils.capabilities_builder import create_capabilities
 logger = logging.getLogger(__name__)
 appium = AppiumManager()
 
+
 def pytest_configure(config):
     logging.basicConfig(
         level=logging.INFO,
         format='%(levelname)s: "%(message)s"',
     )
 
-@pytest.fixture(scope = "session", autouse = True)
-def appium_server():
+
+@pytest.fixture(scope="session", autouse=True)
+def appium_server(request):
+    """
+    Starts the Appium server.
+    If the test uses Chrome (web app), start with --allow-insecure chromedriver_autodownload.
+    """
+
+    is_web_test = any("test_web_app" in item.nodeid for item in request.session.items)
+
     if appium.appium_service.is_running:
         logger.info("Appium server already running, reusing it.")
     else:
-        appium.start_appium_server()
-        logger.info("Starting Appium server...")
+        args = ["--allow-insecure", "chromedriver_autodownload"] if is_web_test else None
+        logger.info(f"Starting Appium server with args: {args if args else 'None'}")
+        appium.start_appium_server(args=args)
 
         time.sleep(2)
 

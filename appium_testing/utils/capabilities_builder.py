@@ -6,8 +6,8 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_CAPS = {
     "deviceName": "Android Emulator",
-    "platformName": "Android",
     "automationName": "UiAutomator2",
+    "platformNames": ["Android"]
 }
 
 def create_capabilities(overrides: dict = None) -> UiAutomator2Options:

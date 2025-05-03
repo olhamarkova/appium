@@ -37,4 +37,5 @@ class DialerApp(App):
     def wait_for_recents(self):
         self.wait_for_element_to_be_clickable("UI_AUTOMATOR", 'resourceId("com.google.android.dialer:id/navigation_bar_item_icon_view").instance(1)', 5)
 
-
+    def assert_end_call_button_visible(self):
+        assert self.__end_call_button(), "The end call button is not visible"
