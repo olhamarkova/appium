@@ -5,9 +5,13 @@ import logging
 from contextlib import contextmanager
 from appium_testing.utils.server_launching import AppiumManager
 from appium_testing.utils.capabilities_builder import create_capabilities
+import mysql.connector
+from dotenv import load_dotenv
+import os
 
 logger = logging.getLogger(__name__)
 appium = AppiumManager()
+load_dotenv()
 
 
 def pytest_configure(config):
@@ -17,12 +21,16 @@ def pytest_configure(config):
     )
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def appium_server(request):
     """
     Starts the Appium server.
     If the test uses Chrome (web app), start with --allow-insecure chromedriver_autodownload.
     """
+
+    if request.node.get_closest_marker("use_appium") is None:
+        yield
+        return
 
     is_web_test = any("test_web_app" in item.nodeid for item in request.session.items)
 
@@ -60,3 +68,21 @@ def app_factory():
             app_instance.quit()
 
     return _create_app
+
+
+@pytest.fixture(scope='function')
+def db_cursor():
+    connection = mysql.connector.connect(
+        host=os.getenv('DB_HOST'),
+        port=int(os.getenv('DB_PORT')),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'),
+        database=os.getenv('DB_NAME')
+    )
+    cursor = connection.cursor(buffered=True)
+
+    try:
+        yield cursor
+    finally:
+        cursor.close()
+        connection.close()

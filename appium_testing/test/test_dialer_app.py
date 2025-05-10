@@ -3,6 +3,7 @@ from appium_testing.apps.dialer.dialer_app import DialerApp
 from appium_testing.utils.capabilities_profiles import dialer
 
 
+@pytest.mark.use_appium
 @pytest.mark.functional
 def test_make_call(app_factory):
     try:

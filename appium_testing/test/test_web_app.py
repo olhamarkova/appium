@@ -8,6 +8,7 @@ from appium_testing.utils.capabilities_profiles import chrome
 wiki_url = get_config_property("basic", "wiki_url")
 
 
+@pytest.mark.use_appium
 @pytest.mark.functional
 def test_open_random_fact(app_factory):
     try:

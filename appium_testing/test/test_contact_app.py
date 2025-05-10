@@ -10,6 +10,7 @@ def get_data():
     ]
 
 
+@pytest.mark.use_appium
 @pytest.mark.functional
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_add_new_contact(app_factory, first_name, last_name, phone_number):
@@ -27,6 +28,7 @@ def test_add_new_contact(app_factory, first_name, last_name, phone_number):
         contact_app.assert_contact_is_added(number_of_contacts_before, number_of_contacts_after)
 
 
+@pytest.mark.use_appium
 @pytest.mark.smoke
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_open_contact(app_factory, first_name, last_name, phone_number):
@@ -42,6 +44,7 @@ def test_open_contact(app_factory, first_name, last_name, phone_number):
         contact_app.assert_number_is_correct(saved_number, phone_number)
 
 
+@pytest.mark.use_appium
 @pytest.mark.functional
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_delete_contact(app_factory, first_name, last_name, phone_number):
