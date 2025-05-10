@@ -25,8 +25,3 @@ def test_make_call(app_factory):
         import traceback
         traceback.print_exc()
         raise
-
-    """
-        TODO:
-        add assertions
-    """

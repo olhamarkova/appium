@@ -7,7 +7,8 @@ logger = logging.getLogger(__name__)
 DEFAULT_CAPS = {
     "deviceName": "Android Emulator",
     "automationName": "UiAutomator2",
-    "platformNames": ["Android"]
+    "platformNames": ["Android"],
+    "adbExecTimeout": 60000
 }
 
 def create_capabilities(overrides: dict = None) -> UiAutomator2Options:
