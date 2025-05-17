@@ -1,10 +1,10 @@
-from typing import Type
+from typing import Type, Literal
 import pytest
 import time
 import logging
 from contextlib import contextmanager
 from appium_testing.utils.server_launching import AppiumManager
-from appium_testing.utils.capabilities_builder import create_capabilities
+from appium_testing.utils.capabilities_builder import create_android_capabilities, create_ios_capabilities
 import mysql.connector
 from dotenv import load_dotenv
 import os
@@ -58,10 +58,15 @@ def appium_server(request):
 @pytest.fixture(scope="function")
 def app_factory():
     @contextmanager
-    def _create_app(app_class: Type, overrides: dict | None= None):
-        options = create_capabilities(overrides)
-        app_instance = app_class(options)
+    def _create_app(app_class: Type, os_type: Literal["android", "ios"], overrides: dict | None = None):
+        if os_type == "android":
+            options = create_android_capabilities(overrides)
+        elif os_type == "ios":
+            options = create_ios_capabilities()
+        else:
+            raise ValueError(f"Unsupported OS type: {os_type}")
 
+        app_instance = app_class(options)
         try:
             yield app_instance
         finally:

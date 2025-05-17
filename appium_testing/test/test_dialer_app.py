@@ -7,7 +7,7 @@ from appium_testing.utils.capabilities_profiles import dialer
 @pytest.mark.functional
 def test_make_call(app_factory):
     try:
-        with app_factory(DialerApp, dialer) as dialer_app:
+        with app_factory(DialerApp, "android", dialer) as dialer_app:
             dialer_app.wait_for_recents()
             dialer_app.open_recents()
             dialer_app.open_dialer()

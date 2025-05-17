@@ -48,7 +48,7 @@ def test_open_contact(app_factory, first_name, last_name, phone_number):
 @pytest.mark.functional
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_delete_contact(app_factory, first_name, last_name, phone_number):
-    with app_factory(ContactsApp, dialer) as contact_app:
+    with app_factory(ContactsApp, "android", dialer) as contact_app:
         full_name = f"{first_name} {last_name}"
         contact_app.open_contacts_tab()
         number_of_contacts_before = contact_app.get_numbers_count()
