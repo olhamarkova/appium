@@ -1,6 +1,7 @@
 from pathlib import Path
 from appium.options.android import UiAutomator2Options
 import logging
+from appium.options.ios import XCUITestOptions
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +12,7 @@ DEFAULT_CAPS = {
     "adbExecTimeout": 60000
 }
 
-def create_capabilities(overrides: dict = None) -> UiAutomator2Options:
+def create_android_capabilities(overrides: dict = None) -> UiAutomator2Options:
     capabilities = DEFAULT_CAPS.copy()
 
     if overrides:
@@ -25,3 +26,13 @@ def create_capabilities(overrides: dict = None) -> UiAutomator2Options:
     logger.info(f"Final capabilities: {capabilities}")
 
     return UiAutomator2Options().load_capabilities(capabilities)
+
+def create_ios_capabilities() -> XCUITestOptions:
+    options = XCUITestOptions()
+    options.set_capability('platformName', 'iOS')
+    options.set_capability('platformVersion', '18.4')
+    options.set_capability('deviceName', 'iPhone 16 Pro')
+    options.set_capability('udid', '1AD48EFE-B353-4DC0-8BA5-E0D72F23D9D6')
+    options.set_capability('bundleId', 'com.olha.IntegrationApp')
+    options.set_capability('noReset', True)
+    return options
