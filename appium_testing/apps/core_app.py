@@ -26,6 +26,9 @@ class App:
         """
         return self.__driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, locator)
 
+    def get_by_accessibility_id(self, locator):
+        return self.__driver.find_element(AppiumBy.ACCESSIBILITY_ID, locator)
+
     def get_elements_by_xpath(self, locator):
         return self.__driver.find_elements(AppiumBy.XPATH, locator)
 
