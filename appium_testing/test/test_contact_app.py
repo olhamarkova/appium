@@ -1,5 +1,5 @@
 import pytest
-from appium_testing.apps.contacts.contacts_app import ContactsApp
+from appium_testing.apps.android_apps.contacts.contacts_app import ContactsApp
 from appium_testing.utils.capabilities_profiles import dialer
 
 def get_data():
@@ -14,7 +14,7 @@ def get_data():
 @pytest.mark.functional
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_add_new_contact(app_factory, first_name, last_name, phone_number):
-    with app_factory(ContactsApp, dialer) as contact_app:
+    with app_factory(ContactsApp, "android", dialer) as contact_app:
         contact_app.open_contacts_tab()
         number_of_contacts_before = contact_app.get_numbers_count()
         contact_app.open_new_contact_form()
@@ -32,7 +32,7 @@ def test_add_new_contact(app_factory, first_name, last_name, phone_number):
 @pytest.mark.smoke
 @pytest.mark.parametrize("first_name, last_name, phone_number", get_data())
 def test_open_contact(app_factory, first_name, last_name, phone_number):
-    with app_factory(ContactsApp, dialer) as contact_app:
+    with app_factory(ContactsApp, "android", dialer) as contact_app:
         full_name = f"{first_name} {last_name}"
         contact_app.open_contacts_tab()
         contact_app.scroll_and_open_contact(full_name)

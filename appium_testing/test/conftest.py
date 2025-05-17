@@ -21,7 +21,7 @@ def pytest_configure(config):
     )
 
 
-@pytest.fixture(scope="function", autouse=True)
+@pytest.fixture(scope="module", autouse=True)
 def appium_server(request):
     """
     Starts the Appium server.
