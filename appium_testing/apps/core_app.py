@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class App:
     def __init__(self, options):
-        self.__driver = webdriver.Remote("http://127.0.0.1:4723", options=options)
+        self.__driver = webdriver.Remote("http://127.0.0.1:4723/wd/hub", options=options)
         self.__actions = ActionChains(self.__driver)
 
     def get_by_id(self, locator):

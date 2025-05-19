@@ -9,6 +9,7 @@ import mysql.connector
 from dotenv import load_dotenv
 import os
 
+
 logger = logging.getLogger(__name__)
 appium = AppiumManager()
 load_dotenv()
@@ -41,7 +42,7 @@ def appium_server(request):
         logger.info(f"Starting Appium server with args: {args if args else 'None'}")
         appium.start_appium_server(args=args)
 
-        time.sleep(2)
+        time.sleep(10)
 
         if not appium.appium_service.is_running:
             raise RuntimeError("Appium server failed to start!")
