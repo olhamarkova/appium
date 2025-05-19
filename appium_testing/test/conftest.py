@@ -29,7 +29,14 @@ def appium_server(request):
     If the test uses Chrome (web app), start with --allow-insecure chromedriver_autodownload.
     """
 
-    if request.node.get_closest_marker("use_appium") is None:
+    needs_appium = any(
+        item.get_closest_marker("use_appium") is not None
+        for item in request.session.items
+        if item.nodeid.startswith(request.node.nodeid)
+    )
+
+    if not needs_appium:
+        # Skip Appium startup for non-mobile tests
         yield
         return
 

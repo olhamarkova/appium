@@ -35,4 +35,6 @@ def create_ios_capabilities() -> XCUITestOptions:
     options.set_capability('udid', '1AD48EFE-B353-4DC0-8BA5-E0D72F23D9D6')
     options.set_capability('bundleId', 'com.olha.IntegrationApp')
     options.set_capability('noReset', True)
+    options.set_capability('automationName', 'XCUITest')
+    options.set_capability("useNewWDA", True)
     return options
