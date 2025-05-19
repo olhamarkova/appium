@@ -11,6 +11,9 @@ class IntegrationApp(App):
     def __alerts_link(self):
         return self.get_by_xpath('//XCUIElementTypeStaticText[@name="Alerts"]')
 
+    def __attributes_link(self):
+        return self.get_by_accessibility_id('Attributes')
+
     def __alerts_text_filed(self):
         return self.get_by_xpath('//XCUIElementTypeTextField[@name="textField"]')
 
@@ -23,9 +26,15 @@ class IntegrationApp(App):
     def __will_do_button(self):
         return self.get_by_accessibility_id('Will do')
 
+    def __attributes_value_input(self):
+        return self.get_by_xpath('//XCUIElementTypeTextField[1]')
+
 
     def open_alerts_page(self):
         self.__alerts_link().click()
+
+    def open_attributes_page(self):
+        self.__attributes_link().click()
 
     def fill_alert_test_field(self, text):
         self.__alerts_text_filed().send_keys(text)
@@ -39,11 +48,17 @@ class IntegrationApp(App):
     def go_back(self):
         self.__back_button().click()
 
+    def clear_value_input(self):
+        self.__attributes_value_input().clear()
+
     def assert_alert_is_opened(self):
         assert self.__app_alert()
 
     def assert_main_page_is_opened(self):
         assert self.__alerts_link()
+
+    def assert_value_is_cleared(self):
+        assert not self.__attributes_value_input().get_attribute('value')
 
 
 
