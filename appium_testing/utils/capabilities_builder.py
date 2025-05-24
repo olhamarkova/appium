@@ -37,4 +37,5 @@ def create_ios_capabilities() -> XCUITestOptions:
     options.set_capability('noReset', True)
     options.set_capability('automationName', 'XCUITest')
     options.set_capability("useNewWDA", True)
+
     return options
