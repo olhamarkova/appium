@@ -32,6 +32,9 @@ class App:
     def get_elements_by_xpath(self, locator):
         return self.__driver.find_elements(AppiumBy.XPATH, locator)
 
+    def get_element_by_class(self, locator):
+        return self.__driver.find_element(AppiumBy.CLASS_NAME, locator)
+
     def get_scrollable_element_by_text(self, text):
         return self.__driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR, "new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textContains(\""+text+"\").instance(0))")
 

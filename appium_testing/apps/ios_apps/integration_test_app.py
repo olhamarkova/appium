@@ -1,4 +1,7 @@
 from appium_testing.apps.core_app import App
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class IntegrationApp(App):
@@ -29,6 +32,9 @@ class IntegrationApp(App):
     def __attributes_value_input(self):
         return self.get_by_xpath('//XCUIElementTypeTextField[1]')
 
+    def __switch(self):
+        return self.get_element_by_class('XCUIElementTypeSwitch')
+
 
     def open_alerts_page(self):
         self.__alerts_link().click()
@@ -51,6 +57,16 @@ class IntegrationApp(App):
     def clear_value_input(self):
         self.__attributes_value_input().clear()
 
+    def turn_off_switch(self):
+        is_switch_on = self.__switch().get_attribute("value")
+        if is_switch_on == '1':
+            logger.info('Turning off the switch')
+            self.__switch().click()
+        elif is_switch_on == '0':
+            logger.info('Switch is turned off')
+            pass
+
+
     def assert_alert_is_opened(self):
         assert self.__app_alert()
 
@@ -59,6 +75,10 @@ class IntegrationApp(App):
 
     def assert_value_is_cleared(self):
         assert not self.__attributes_value_input().get_attribute('value')
+
+    def assert_switch_is_turned_off(self):
+        is_switch_on = self.__switch().get_attribute("value")
+        assert is_switch_on == '0'
 
 
 

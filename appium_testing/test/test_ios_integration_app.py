@@ -1,7 +1,7 @@
 import pytest
 from appium_testing.apps.ios_apps.integration_test_app import IntegrationApp
 
-@pytest.mark.use_appium
+# @pytest.mark.use_appium
 @pytest.mark.functional
 def test_integration_app(app_factory):
     with app_factory(IntegrationApp, "ios") as app:
@@ -17,3 +17,6 @@ def test_integration_app(app_factory):
         app.open_attributes_page()
         app.clear_value_input()
         app.assert_value_is_cleared()
+
+        app.turn_off_switch()
+        app.assert_switch_is_turned_off()
