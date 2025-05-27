@@ -39,6 +39,9 @@ class IntegrationApp(App):
     def __steppers(self, name):
         return self.get_by_xpath(f'//XCUIElementTypeButton[@name="{name}"]')
 
+    def __slider(self):
+        return self.get_element_by_class('XCUIElementTypeSlider')
+
 
     # Actions
     def open_alerts_screen(self):
@@ -82,6 +85,11 @@ class IntegrationApp(App):
         logger.info(f"Clicking the {name} button")
         self.__steppers(name).click()
 
+    def change_slider(self, value):
+        logger.info(f"Changing slider to {value}")
+        self.__slider().send_keys(value)
+
+
 
     # Assertions
     def assert_alert_is_opened(self):
@@ -106,4 +114,8 @@ class IntegrationApp(App):
             assert is_button_enabled == "false"
             logger.info(f"Button {name} is disabled")
 
-
+    def assert_slider_value(self, value):
+        slider_value = self.__slider().get_attribute("value")
+        final_value = int(slider_value[0:2])
+        logger.info(f"Slider value is {final_value}")
+        assert final_value in range(value - 3, value + 3)
