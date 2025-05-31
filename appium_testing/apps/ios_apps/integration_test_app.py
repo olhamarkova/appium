@@ -42,6 +42,9 @@ class IntegrationApp(App):
     def __slider(self):
         return self.get_element_by_class('XCUIElementTypeSlider')
 
+    def __date_picker_wheel(self, index):
+        return self.get_elements_by_class('XCUIElementTypePickerWheel')[index]
+
 
     # Actions
     def open_alerts_screen(self):
@@ -89,6 +92,11 @@ class IntegrationApp(App):
         logger.info(f"Changing slider to {value}")
         self.__slider().send_keys(value)
 
+    def select_day_on_picker_wheel(self):
+        self.execute_script("mobile: selectPickerWheelValue", {'order': 'next', 'offset': 0.15, 'element': self.__date_picker_wheel(0)})
+
+    def set_date(self, index, data):
+        self.__date_picker_wheel(index).send_keys(data)
 
 
     # Assertions

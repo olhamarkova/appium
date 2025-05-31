@@ -32,6 +32,9 @@ class App:
     def get_elements_by_xpath(self, locator):
         return self.__driver.find_elements(AppiumBy.XPATH, locator)
 
+    def get_elements_by_class(self, locator):
+        return self.__driver.find_elements(AppiumBy.CLASS_NAME, locator)
+
     def get_element_by_class(self, locator):
         return self.__driver.find_element(AppiumBy.CLASS_NAME, locator)
 
@@ -109,6 +112,8 @@ class App:
         self.__actions.perform()
         logger.info(f"Performing a long tap")
 
-
     def background_app(self, seconds):
         self.__driver.background_app(seconds)
+
+    def execute_script(self, script_name, script):
+        self.__driver.execute_script(script_name, script)

@@ -58,6 +58,9 @@ from appium_testing.apps.ios_apps.integration_test_app import IntegrationApp
 @pytest.mark.functional
 def test_date_picker_wheel(app_factory):
     with app_factory(IntegrationApp, "ios") as app:
-
+        app.open_attributes_screen()
+        app.select_day_on_picker_wheel()
+        app.set_date(1, "15")
+        app.set_date(2, "06")
 
         app.go_back()
