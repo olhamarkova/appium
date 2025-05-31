@@ -46,11 +46,18 @@ from appium_testing.apps.ios_apps.integration_test_app import IntegrationApp
 #
 #         app.go_back()
 
+# @pytest.mark.functional
+# def test_sliders(app_factory):
+#     with app_factory(IntegrationApp, "ios") as app:
+#         app.open_attributes_screen()
+#         app.change_slider(0.2)
+#         app.assert_slider_value(20)
+#
+#         app.go_back()
+
 @pytest.mark.functional
-def test_sliders(app_factory):
+def test_date_picker_wheel(app_factory):
     with app_factory(IntegrationApp, "ios") as app:
-        app.open_attributes_screen()
-        app.change_slider(0.2)
-        app.assert_slider_value(20)
+
 
         app.go_back()

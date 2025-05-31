@@ -108,3 +108,7 @@ class App:
         self.__actions.click_and_hold(element)
         self.__actions.perform()
         logger.info(f"Performing a long tap")
+
+
+    def background_app(self, seconds):
+        self.__driver.background_app(seconds)
