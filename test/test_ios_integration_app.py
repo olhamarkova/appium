@@ -1,5 +1,5 @@
 import pytest
-from appium_testing.apps.ios_apps.integration_app import IntegrationApp
+from apps.ios_apps.integration_app import IntegrationApp
 
 
 @pytest.mark.use_appium

@@ -1,8 +1,8 @@
 import pytest
 import time
-from appium_testing.utils.config_reader import get_config_property
-from appium_testing.apps.android_apps.web_app.web_app import WebApp
-from appium_testing.utils.capabilities_profiles import chrome
+from utils.config_reader import get_config_property
+from apps.android_apps.web_app.web_app import WebApp
+from utils.capabilities_profiles import chrome
 
 
 wiki_url = get_config_property("basic", "wiki_url")

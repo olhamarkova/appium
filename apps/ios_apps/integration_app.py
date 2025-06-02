@@ -1,4 +1,4 @@
-from appium_testing.apps.core_app import App
+from apps.core_app import App
 import logging
 
 logger = logging.getLogger(__name__)

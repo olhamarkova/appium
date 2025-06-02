@@ -3,8 +3,8 @@ import pytest
 import time
 import logging
 from contextlib import contextmanager
-from appium_testing.utils.server_launching import AppiumManager
-from appium_testing.utils.capabilities_builder import create_android_capabilities, create_ios_capabilities
+from utils.server_launching import AppiumManager
+from utils.capabilities_builder import create_android_capabilities, create_ios_capabilities
 import mysql.connector
 from dotenv import load_dotenv
 import os

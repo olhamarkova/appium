@@ -1,4 +1,4 @@
-from appium_testing.apps.core_app import App
+from apps.core_app import App
 
 class WebApp(App):
     def __init__(self, options):

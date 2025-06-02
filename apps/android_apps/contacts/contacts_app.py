@@ -1,6 +1,6 @@
-from appium_testing.apps.core_app import App
+from apps.core_app import App
 import logging
-from appium_testing.utils.normalize_phone import normalize
+from utils.normalize_phone import normalize
 
 logger = logging.getLogger(__name__)
 
