@@ -1,8 +1,8 @@
 import pytest
 import time
-from utils.config_reader import get_config_property
-from apps.android_apps.web_app.web_app import WebApp
-from utils.capabilities_profiles import chrome
+from ..utils.config_reader import get_config_property
+from ..apps.android_apps.web_app.web_app import WebApp
+from ..utils.capabilities_profiles import chrome
 
 
 wiki_url = get_config_property("basic", "wiki_url")

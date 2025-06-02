@@ -1,6 +1,6 @@
 import pytest
-from apps.android_apps.dialer.dialer_app import DialerApp
-from utils.capabilities_profiles import dialer
+from ..apps.android_apps.dialer.dialer_app import DialerApp
+from ..utils.capabilities_profiles import dialer
 
 
 @pytest.mark.use_appium
