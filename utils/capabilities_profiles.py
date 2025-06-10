@@ -7,3 +7,7 @@ chrome = {
     "browserName": "Chrome",
     "appium:autodownloadEnabled": True
 }
+
+cossacks = {
+    "app": "app/cossacks.apk"
+}
