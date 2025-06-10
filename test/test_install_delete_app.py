@@ -18,5 +18,5 @@ def test_install_delete_app(app_factory):
         with app_factory(CossacksGame, "android", cossacks) as cossacks_game:
              cossacks_game.wait(5)
              run_adb_command.uninstall_app()
-             run_adb_command.assert_app_is_deleted()
+             run_adb_command.assert_app_is_uninstalled()
 

@@ -21,5 +21,5 @@ class AppManager():
         return f"package:{self.package}" in output
 
 
-    def assert_app_is_deleted(self):
+    def assert_app_is_uninstalled(self):
         assert not self.is_app_installed()
