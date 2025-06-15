@@ -1,6 +1,6 @@
 import pytest
-from ..apps.android_apps.contacts.contacts_app import ContactsApp
-from ..utils.capabilities_profiles import dialer
+from apps.android_apps.contacts.contacts_app import ContactsApp
+from utils.capabilities_profiles import dialer
 
 def get_data():
     return [

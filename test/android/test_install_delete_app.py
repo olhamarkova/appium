@@ -1,8 +1,8 @@
 import os
 
-from ..apps.android_apps.cossacks_game.cossacks_game import CossacksGame
-from ..utils.app_manager import AppManager
-from ..utils.capabilities_profiles import cossacks
+from apps.android_apps.cossacks_game.cossacks_game import CossacksGame
+from utils.app_manager import AppManager
+from utils.capabilities_profiles import cossacks
 import pytest
 from dotenv import load_dotenv
 
