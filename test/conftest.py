@@ -70,7 +70,7 @@ def app_factory():
         if os_type == "android":
             options = create_android_capabilities(overrides)
         elif os_type == "ios":
-            options = create_ios_capabilities()
+            options = create_ios_capabilities(overrides)
         else:
             raise ValueError(f"Unsupported OS type: {os_type}")
 
